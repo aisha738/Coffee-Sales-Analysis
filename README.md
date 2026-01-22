@@ -86,7 +86,6 @@ The United States is the primary revenue driver (**$35.6k**), while the United K
 **Recommendation:**  
 Investigate UK pricing structures and logistics to identify and resolve the market penetration gap.
 
----
 
 ### 2. Customer Concentration
 **Insight:**  
@@ -95,7 +94,6 @@ Revenue is heavily reliant on a small “whale” cohort (top 5 customers), with
 **Recommendation:**  
 Implement a Key Account Management protocol to retain high-value customers and reduce revenue volatility.
 
----
 
 ### 3. Product Strategy
 **Insight:**  
@@ -104,7 +102,6 @@ Arabica and Liberica beans generate higher profit margins compared to the high-v
 **Recommendation:**  
 Prioritize marketing of **Premium Roast bundles** to encourage volume buyers to transition toward higher-margin products.
 
----
 
 ### 4. Seasonal Trends
 **Insight:**  
