@@ -77,11 +77,38 @@ The dataset used for this project is a **synthetic dataset** representing coffee
 ---
 
 ## Insights and Recommendations
-*(This section summarizes the key findings derived from the analysis)*
+*(For a detailed breakdown with visualizations, please refer to the Strategic Insights Report)*
 
-- **Insight 1:** _[Placeholder]_  
-- **Insight 2:** _[Placeholder]_  
+### 1. Market Disparity
+**Insight:**  
+The United States is the primary revenue driver (**$35.6k**), while the United Kingdom is significantly underperforming (**$2.8k**) relative to Ireland (**$6.7k**), despite having a much larger market size.
 
-### Recommendations
-- **Recommendation 1:** _[Placeholder]_  
+**Recommendation:**  
+Investigate UK pricing structures and logistics to identify and resolve the market penetration gap.
 
+---
+
+### 2. Customer Concentration
+**Insight:**  
+Revenue is heavily reliant on a small “whale” cohort (top 5 customers), with individual customer spend exceeding **$270**.
+
+**Recommendation:**  
+Implement a Key Account Management protocol to retain high-value customers and reduce revenue volatility.
+
+---
+
+### 3. Product Strategy
+**Insight:**  
+Arabica and Liberica beans generate higher profit margins compared to the high-volume Robusta sales.
+
+**Recommendation:**  
+Prioritize marketing of **Premium Roast bundles** to encourage volume buyers to transition toward higher-margin products.
+
+---
+
+### 4. Seasonal Trends
+**Insight:**  
+Sales data shows consistent post-holiday demand slumps during **January and February**.
+
+**Recommendation:**  
+Replace aggressive discounting with **bundle strategies** during low-demand months to preserve Average Order Value (AOV).
