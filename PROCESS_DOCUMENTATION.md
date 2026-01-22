@@ -131,7 +131,7 @@ The dataset consists of **three relational tables**:
    ```excel
    =IF(XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName])=0,"",XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName]))
    ```
-  ### Note on ETL Process
+### Note on ETL Process
 
 - This workflow follows **ETL (Extract, Transform, Load)** principles:
 
