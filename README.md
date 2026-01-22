@@ -58,7 +58,7 @@ The dataset used for this project is a **synthetic dataset** representing coffee
 
 - **Raw Data File:** Original, unmodified Excel dataset used as input.
 - **Interactive Excel Dashboard:** A fully functional Excel workbook (.xlsx) containing the raw data, pivot tables, and the dynamic dashboard interface.
-- **Technical Readme:** Brief documentation of data cleaning and transformation steps.
+- **Process Documentation:** Brief documentation of data cleaning and transformation steps.
 - **Strategic Insights Report:** A summary of key findings and actionable business recommendations.
 - **Dashboard Screenshot:** Static preview of the Excel dashboard.
 
