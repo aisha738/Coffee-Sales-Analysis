@@ -59,6 +59,7 @@ To enable analysis by customer attributes:
 **Example Formula:**
 ```excel
 =XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName])
+```
 
 ### Conditional Logic (IF statements)
 
@@ -76,6 +77,7 @@ Created a **Sales** column to quantify revenue:
 
 ```excel
 =[@Quantity] * [@Unit_Price]
+```
 
 ## 3. Data Analysis (Pivot Tables)
 
@@ -113,4 +115,3 @@ This ensures that when a user filters by "United States", every chart on the das
 
 **Challenge:** Ensuring the dashboard fits on a single screen (No scrolling).  
 **Solution:** Designed a **grid layout**, hid gridlines, and collapsed the ribbon for a cleaner UI.
-
