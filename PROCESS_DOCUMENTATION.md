@@ -59,3 +59,58 @@ To enable analysis by customer attributes:
 **Example Formula:**
 ```excel
 =XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName])
+
+### Conditional Logic (IF statements)
+
+The raw data used abbreviations for product types (e.g., "Rob", "Exc").  
+I created a new column `Coffee Type Name` using nested IF functions (or a lookup table) to expand these into readable categories:
+
+- Robusta
+- Excelsa
+- Arabica
+- Liberica
+
+### Derived Columns
+
+Created a **Sales** column to quantify revenue:
+
+```excel
+=[@Quantity] * [@Unit_Price]
+
+## 3. Data Analysis (Pivot Tables)
+
+I created a dedicated "Processing" sheet to house Pivot Tables.  
+This keeps the raw data separate from the presentation layer (Dashboard), ensuring **data integrity**.
+
+- **Time Series Analysis:** Grouped `Order Date` by Years and Months to track revenue trends.  
+- **Categorical Segmentation:** Aggregated Sales by `Coffee Type` and `Roast Type`.  
+- **Top N Analysis:** Sorted customer data by Sum of Sales (Descending) to isolate the **Top 5 customers**.
+
+---
+
+## 4. Visualization & Dashboard Design
+
+### Chart Selection Strategy
+
+- **Line Charts:** For timeline trends (visualizing volatility and seasonality).  
+- **Bar Charts:** For categorical comparison (Country and Top 5 Customers).
+
+### Interactivity (Slicers & Timelines)
+
+- Inserted **Slicers** for `Loyalty Card`, `Roast Type Name`, and `Size`.  
+- Inserted a **Timeline** for `Order Date`.
+
+**Crucial Step:**  
+Used "Report Connections" to link all slicers to every Pivot Table/Chart.  
+This ensures that when a user filters by "United States", every chart on the dashboard updates simultaneously.
+
+---
+
+## 5. Challenges & Solutions
+
+**Challenge:** The raw product codes were unintuitive for end-users.  
+**Solution:** Mapped codes to full descriptions (e.g., `"M" -> "Medium"`) before visualizing.
+
+**Challenge:** Ensuring the dashboard fits on a single screen (No scrolling).  
+**Solution:** Designed a **grid layout**, hid gridlines, and collapsed the ribbon for a cleaner UI.
+
