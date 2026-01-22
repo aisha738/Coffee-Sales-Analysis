@@ -1,117 +1,132 @@
 # Technical Process Documentation
 
-## Project Scope
-This document outlines the end-to-end technical procedure for creating the **Coffee Sales Dashboard**.  
-The project simulates a real-world **Data Analyst workflow**: extracting raw data, cleaning and transforming it, building a data model, and creating visual narratives for decision-making.
+## Project Overview
+
+This project simulates a real-world **Data Analyst workflow** using Microsoft Excel. It covers the full cycle of data analysis:
+
+1. Extracting and gathering raw data  
+2. Cleaning, transforming, and denormalizing data  
+3. Building a structured data model  
+4. Creating interactive visualizations and dashboards for decision-making  
+
+**Tools Used:** Microsoft Excel (Office 365)  
+**Key Techniques:** Data Modeling (Star Schema), ETL (Extract, Transform, Load), Pivot Tables, Dynamic Visualizations, Interactive Dashboards  
 
 ---
 
 ## 1. Data Gathering & Schema Understanding
 
-The dataset consisted of **three separate relational tables**.  
-The first step was to understand the schema and relationships in order to merge them correctly.
+The dataset consists of **three relational tables**:
 
-### Tables Overview
-- **orders (Fact Table)**  
-  Contains transactional events  
-  - Order ID  
-  - Order Date  
-  - Quantity  
+| Table      | Type           | Key Fields & Description |
+|------------|----------------|-------------------------|
+| `orders`   | Fact Table     | Order ID, Order Date, Customer ID, Product ID, Quantity |
+| `customers`| Dimension Table| Customer ID, Name, Email, Country, Loyalty Status |
+| `products` | Dimension Table| Product ID, Coffee Type, Roast Type, Size, Unit Price |
 
-- **customers (Dimension Table)**  
-  Contains customer attributes  
-  - Customer ID  
-  - Customer Name  
-  - Country  
-  - Loyalty Status  
-
-- **products (Dimension Table)**  
-  Contains product specifications  
-  - Product ID  
-  - Coffee Type  
-  - Roast Type  
-  - Unit Price  
-
-### Technical Decision
-Instead of using **Power Query** (a more advanced option), Excel formulas were used to **denormalize** the data into a single master table.
-
-**Rationale:**  
-This approach demonstrates strong proficiency with **core Excel lookup functions**, which are essential for ad-hoc and real-world spreadsheet analysis.
+**Technical Decision:**  
+- Used Excel formulas for denormalization instead of Power Query  
+- Demonstrated proficiency with lookup functions  
 
 ---
 
 ## 2. Data Cleaning & Transformation (ETL)
 
-Before analysis, a structured data quality and transformation process was carried out.
+### 2.1 Handling Missing Data
+1. Checked all columns for **null or blank values**  
+2. Verified **critical keys** (Customer ID, Product ID) were populated  
 
-### Handling Missing Data
-- Checked all columns for null or blank values.
-- Verified that critical keys (**Customer ID** and **Product ID**) were populated across all records.
+### 2.2 Data Formatting
+1. Standardized **Order Date** (`dd-mmm-yyyy`)  
+2. Formatted **Unit Price** and **Sales** as currency  
+3. Applied custom number format to **Size** (`0.0 "kg"`)  
 
-### Data Formatting
-- Standardized **Order Date** into a recognizable Date format.
-- Formatted **Unit Price** and **Sales** columns as Currency ($).
+### 2.3 Data Merging / Denormalization
 
-### Data Enrichment (XLOOKUP & INDEX-MATCH)
-To enable analysis by customer attributes:
-- Merged fields from the `customers` table into the `orders` table using **XLOOKUP**.
-
-**Example Formula:**
-```excel
-=XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName])
+#### Strategy: Hybrid Lookup Approach
+1. **Customer Information (XLOOKUP)**
+ ```excel
+   =IF(XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName])=0,"",XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName]))
 ```
+## 2.4 Product Information (INDEX-MATCH)
 
-### Conditional Logic (IF statements)
-
-The raw data used abbreviations for product types (e.g., "Rob", "Exc").  
-I created a new column `Coffee Type Name` using nested IF functions (or a lookup table) to expand these into readable categories:
-
-- Robusta
-- Excelsa
-- Arabica
-- Liberica
-
-### Derived Columns
-
-Created a **Sales** column to quantify revenue:
-
-```excel
-=[@Quantity] * [@Unit_Price]
-```
-
-## 3. Data Analysis (Pivot Tables)
-
-I created a dedicated "Processing" sheet to house Pivot Tables.  
-This keeps the raw data separate from the presentation layer (Dashboard), ensuring **data integrity**.
-
-- **Time Series Analysis:** Grouped `Order Date` by Years and Months to track revenue trends.  
-- **Categorical Segmentation:** Aggregated Sales by `Coffee Type` and `Roast Type`.  
-- **Top N Analysis:** Sorted customer data by Sum of Sales (Descending) to isolate the **Top 5 customers**.
+- Retrieves **Coffee Type, Roast Type, Size, Unit Price**  
+- Dynamic column referencing for multiple fields  
 
 ---
 
-## 4. Visualization & Dashboard Design
+## 3. Data Cleaning & Standardization
 
-### Chart Selection Strategy
-
-- **Line Charts:** For timeline trends (visualizing volatility and seasonality).  
-- **Bar Charts:** For categorical comparison (Country and Top 5 Customers).
-
-### Interactivity (Slicers & Timelines)
-
-- Inserted **Slicers** for `Loyalty Card`, `Roast Type Name`, and `Size`.  
-- Inserted a **Timeline** for `Order Date`.
-
-**Crucial Step:**  
-Used "Report Connections" to link all slicers to every Pivot Table/Chart.  
-This ensures that when a user filters by "United States", every chart on the dashboard updates simultaneously.
+| Abbreviation | Full Name  |
+|--------------|------------|
+| Rob          | Robusta    |
+| Exc          | Excelsa    |
+| Ara          | Arabica    |
+| Lib          | Liberica   |
+| M            | Medium     |
+| L            | Light      |
+| D            | Dark       |
 
 ---
 
-## 5. Challenges & Solutions
+## 4. Feature Engineering (Calculated Columns)
 
-**Challenge:** The raw product codes were unintuitive for end-users.  
-**Solution:** Mapped codes to full descriptions (e.g., `"M" -> "Medium"`) before visualizing.
+### 4.1 **Sales Metric**  
+```excel
+[@Unit Price] * [@Quantity]
+```
 
-**Challenge:** Ensuring the dashboard fits on a single screen (No scrolling).  
-**Solution:** Designed a **grid layout**, hid gridlines, and collapsed the ribbon for a cleaner UI.
+### 4.2 Loyalty Check
+
+- Loyalty Card (Yes/No) for segmentation  
+
+---
+
+## 5. Data Analysis (Pivot Tables)
+
+1. Converted **Master Table** to Excel Table (`Ctrl+T`)  
+2. Created **Processing Sheet** to separate raw data  
+
+**Pivot Table Structure:**  
+- Total Sales over Time (Year & Month)  
+- Sales by Country (US, UK, Ireland)  
+- Top 5 Customers (Sales Descending, Top N filter)  
+
+---
+
+## 6. Visualization & Dashboard Design
+
+### 6.1 Chart Selection
+- Line Chart: Sales over Time  
+- Bar Chart: Country & Top Customers  
+
+### 6.2 Interactivity
+- Slicers: Roast Type, Size, Loyalty Card  
+- Timeline: Order Date for month/year filtering  
+- Report Connections: All slicers/timelines connected  
+
+### 6.3 UI / Styling
+- Purple Theme (RGB: 60, 20, 100)  
+- Grid layout, hidden gridlines, collapsed ribbon  
+
+---
+
+## 7. Challenges & Solutions
+
+| Challenge                        | Solution                                                        |
+|----------------------------------|-----------------------------------------------------------------|
+| Raw product codes unintuitive     | Mapped codes to full descriptions before visualization         |
+| Dashboard fitting on single screen | Grid layout, optimized chart sizing, hidden interface elements |
+
+---
+
+## 8. Key Takeaways
+
+- Full-cycle Excel-based data analysis  
+- Hybrid lookup methods (XLOOKUP + INDEX-MATCH)  
+- Interactive dashboard with slicers, timelines, connected charts  
+- Data cleaning, transformation, and standardization best practices  
+- Actionable insights: sales trends, top customers, segmentation by loyalty & product type  
+
+   ```excel
+   =IF(XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName])=0,"",XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName]))
