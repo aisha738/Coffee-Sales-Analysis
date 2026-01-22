@@ -130,3 +130,12 @@ The dataset consists of **three relational tables**:
 
    ```excel
    =IF(XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName])=0,"",XLOOKUP([@CustomerID], customers[CustomerID], customers[CustomerName]))
+   ```
+  ### Note on ETL Process
+
+- This workflow follows **ETL (Extract, Transform, Load)** principles:
+
+  1. **Extract:** Pull data from `customers` and `products` into `orders`  
+  2. **Transform:** Clean, format, denormalize, and calculate in the Master Table  
+  3. **Load:** Store enriched data in the `orders` Master Table ready for analysis 
+
