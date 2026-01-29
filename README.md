@@ -76,7 +76,6 @@ The dataset used for this project is a **synthetic dataset** representing coffee
 ---
 
 ## Insights and Recommendations
-*(For a detailed breakdown with visualizations, please refer to the Strategic Insights Report)*
 
 ### 1. Market Disparity
 **Insight:**  
